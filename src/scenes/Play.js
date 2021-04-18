@@ -100,7 +100,7 @@ class Play extends Phaser.Scene {
         
         if(this.p1Score > highScore) {
             highScore = this.p1Score;
-            this.hScore.text = highScore;
+            this.scoreRight.text = highScore;
         }
         
         // check key input for restart
