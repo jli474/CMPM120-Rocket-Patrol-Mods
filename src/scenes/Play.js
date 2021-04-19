@@ -4,6 +4,7 @@ class Play extends Phaser.Scene {
     }
 
     preload() {
+        // Redesign the game's artwork, UI, and sound to change its theme/aesthetic
         // load images/tile sprites
         this.load.image('cat01', './assets/cat1.png');
         this.load.image('cat02', './assets/cat2.png');
@@ -27,6 +28,7 @@ class Play extends Phaser.Scene {
         this.title = this.add.tileSprite(0, 0, 640, 131, 'title').setOrigin(0, 0);
         // add rocket (p1)
         // add rocket (p2)
+        // two-player mode 
         if(game.settings.mode == 1) {
             this.p1Rocket = new Rocket(this, game.config.width/3, game.config.height - borderUISize - borderPadding - 55, 'cat01').setScale(1.2, 1.2).setOrigin(0.5, 0);
             this.p2Rocket = new Rocket2(this, game.config.width/1.5, game.config.height - borderUISize - borderPadding - 55, 'cat02').setScale(1.2, 1.2).setOrigin(0.5, 0);
@@ -39,6 +41,7 @@ class Play extends Phaser.Scene {
         this.ship01 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 4, 'mouse01', 0, 30).setOrigin(0, 0);
         this.ship02 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*5 + borderPadding*2 + 105, 'mouse01', 0, 20).setOrigin(0, 0);
         this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4 - 15, 'mouse01', 0, 10).setOrigin(0, 0);
+        // Create a new spaceship type
         this.shipboss = new Supership(this, game.config.width + 50, borderUISize * 6 - 13, 'fish', 0, 60).setOrigin(0, 0);
         
         // define keys
@@ -76,7 +79,7 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
         this.scoreLeft = this.add.text(borderUISize + borderPadding+60, borderUISize + borderPadding * 2 - 8, this.p1Score, scoreConfig);
-        
+        // Track a high score that persists across scenes and display it in the UI 
         this.scoreRight = this.add.text(430 , borderUISize + borderPadding * 2 + 10, highScore , scoreConfig);
         this.hScoreText = this.add.text(430, 27 , 'High', scoreConfig);
         
