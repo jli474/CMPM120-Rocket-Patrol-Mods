@@ -10,6 +10,7 @@ class Play extends Phaser.Scene {
         this.load.image('mouse01', './assets/Mouse01.png');
         this.load.image('fish', './assets/fish.png');
         this.load.image('floor', './assets/floor.png');
+        this.load.image('title', './assets/title.png');
         // load spritesheet
         this.load.spritesheet('explosion', './assets/die.png', {
             frameWidth: 64,
@@ -23,9 +24,7 @@ class Play extends Phaser.Scene {
         // place starfield
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'floor').setOrigin(0, 0);
 
-        // green UI background
-        this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
-
+        this.title = this.add.tileSprite(0, 0, 640, 131, 'title').setOrigin(0, 0);
         // add rocket (p1)
         // add rocket (p2)
         if(game.settings.mode == 1) {
@@ -37,10 +36,10 @@ class Play extends Phaser.Scene {
         
 
         // add spaceship (x3)
-        this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4, 'mouse01', 0, 30).setOrigin(0, 0);
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'mouse01', 0, 20).setOrigin(0, 0);
-        this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4, 'mouse01', 0, 10).setOrigin(0, 0);
-        this.shipboss = new Supership(this, game.config.width + 50, borderUISize * 6, 'fish', 0, 60).setOrigin(0, 0);
+        this.ship01 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 4, 'mouse01', 0, 30).setOrigin(0, 0);
+        this.ship02 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*5 + borderPadding*2 + 105, 'mouse01', 0, 20).setOrigin(0, 0);
+        this.ship03 = new Spaceship(this, game.config.width, borderUISize*6 + borderPadding*4 - 15, 'mouse01', 0, 10).setOrigin(0, 0);
+        this.shipboss = new Supership(this, game.config.width + 50, borderUISize * 6 - 13, 'fish', 0, 60).setOrigin(0, 0);
         
         // define keys
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -76,10 +75,10 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
         }
-        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig);
+        this.scoreLeft = this.add.text(borderUISize + borderPadding+60, borderUISize + borderPadding * 2 - 8, this.p1Score, scoreConfig);
         
-        this.scoreRight = this.add.text(500 , borderUISize + borderPadding * 2, highScore , scoreConfig);
-        this.hScoreText = this.add.text(500, 17 , 'High', scoreConfig);
+        this.scoreRight = this.add.text(450 , borderUISize + borderPadding * 2 + 10, highScore , scoreConfig);
+        this.hScoreText = this.add.text(450, 27 , 'High', scoreConfig);
         
 
         // GAME OVER flag
